@@ -1,0 +1,49 @@
+<div class="container_fluid settings_cont">
+    <div class="empty_state" style="
+    color: #C6CAD0;
+    font-size: 28px;">
+        <h3 style="font-weight: 300;    padding-left: 30px;">Settings for {{$ctrl.mainLabel}}<span ng-if="$ctrl.currentPlan" class="plan-badge">{{$ctrl.currentPlan.plan }} plan <span ng-if="$ctrl.currentPlan.isTrail">{{$ctrl.getExpiredDate($ctrl.currentPlan.expiration)}}</span></span></h3>
+
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-2 settings_menu_cont">
+            <div class="settings_list">
+                <label style="font-weight: normal;">
+                    <input type="checkbox" ng-model="$ctrl.launchOnStartup" ng-true-value="true" ng-false-value="false" ng-change="$ctrl.launchChange()"> <span style="
+    padding-left: 6px;"> Launch on Startup</span></label>
+            </div>
+            <div class="settings_list">
+                <div class="get_help_btn" ng-click="$ctrl.getHelp()" style="cursor: pointer;">Get Help</div>
+                <div class="get_help_btn" ng-click="$ctrl.buyNow()" style="cursor: pointer;">Buy Now</div>
+                <div class="get_help_btn" ng-click="$ctrl.clearCache()" style="cursor: pointer;">Clear Cache</div>
+                <div class="get_help_btn" ng-click="$ctrl.showSubscription()" style="cursor: pointer;">Subscribe</div>
+                <div class="get_help_btn" ng-click="$ctrl.showReferral(false)" style="cursor :pointer;">Refer Friends</div>
+                <div class="get_help_btn" ng-click="$ctrl.showRegistration(false)" style="cursor: pointer;">Register your license</div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="panel panel-default" style="max-height: 80vh">
+                <div class="panel-heading">Services</div>
+                <div class="panel-body" style="max-height: 70vh;">
+                    <div>
+                        <div class="list-group enabled_serivices_list">
+                            <a class="list-group-item" style="cursor: pointer;" ng-repeat="service in $ctrl.enabledServices" ng-click="$ctrl.editService(service)" ng-class="{'diabled-service-item': !service.isActive}">
+                                <img class="settings_logo" ng-src="images/services/{{service.name}}.{{service.logo_ext}}" ng-if="!service.favicon" />
+                                <img class="settings_logo" ng-src="{{service.favicon}}" ng-if="service.favicon" />
+                                <span class="settings_service_label">{{service.label}}</span>
+                                <span class="btn btn-sm edit-btn-list">
+                            <span ng-if="!service.isActive" class="diabled-service-item-text">Service disabled</span>
+                                <img src="./images/edit.svg" style="width: 18px;" /></span>
+                            </a>
+                            <a class="list-group-item" ng-if="$ctrl.enabledServices.length==0">
+                            No Services Configured
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-2"></div>
+</div>

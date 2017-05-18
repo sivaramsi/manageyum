@@ -1,0 +1,84 @@
+<div class="modal-header">
+    <img ng-src="images/services/{{$ctrl.service.name}}.{{$ctrl.service.logo_ext}}" />
+    <span class="modal-title">Add {{$ctrl.service.name | labelParser}}</span>
+</div>
+<form>
+    <div class="modal-body">
+        <div class="form-group" style="    padding-left: 30px;">
+            <label for="userGroupName" class="bm0">Name</label>
+            <input type="text" ng-model="$ctrl.name" class="form-control" id="teamName" style="font-weight: 700;
+    font-size: 18px;
+    height: 30px;
+    width: 50%;
+    display: inline-block;
+    margin-left: 41px;" focus="true" />
+            <span style="    display: block;
+    margin-left: 82px;
+    color: red;" ng-if="$ctrl.nameError">Name is already used by some other service.</span>
+        </div>
+        <div ng-if="!$ctrl.service.is_custom_app">
+            <div class="form-group" ng-if="$ctrl.service.isSubdomain &&  !$ctrl.needCustomURL" style="    padding-left: 30px;">
+                <label for="userGroupName" class="bm0">domain</label>
+                <input type="text" ng-model="$ctrl.domain" class="form-control" id="teamDomain" style="    font-weight: 700;
+    font-size: 16px;
+    height: 30px;
+    width: 40%;
+    display: inline-block;
+    border: 1px solid #B4E6E5;
+    margin-left: 30px;" focus="true" />
+                <span>{{$ctrl.service.baseURL}}</span>
+            </div>
+            <div class="setting_field" ng-if="$ctrl.service.has_custom_url">
+                <span>Need Custom URL?</span>
+                <div class="material-switch pull-right">
+                    <input id="notifications" name="notifications" type="checkbox" ng-model="$ctrl.needCustomURL" ng-true-value="true" ng-false-value="false" />
+                    <label for="notifications" class="label-primary"></label>
+                </div>
+            </div>
+            <div class="form-group" ng-if="$ctrl.service.has_custom_url && $ctrl.needCustomURL" style="    padding-left: 30px;">
+                <label for="userGroupName" class="bm0">Custom URL</label>
+                <input type="text" ng-model="$ctrl.customURL" class="form-control" id="teamName" style="font-weight: 700;
+    font-size: 18px;
+    height: 30px;
+    width: 50%;
+    display: inline-block;
+    margin-left: 50px;" focus="true" />
+            </div>
+        </div>
+        <div ng-if="$ctrl.service.is_custom_app">
+            <div class="form-group" style="    padding-left: 30px;">
+                <label for="userGroupName" class="bm0">URL</label>
+                <input type="text" ng-model="$ctrl.customAppURL" class="form-control" id="teamName" style="font-weight: 700;
+    font-size: 18px;
+    height: 30px;
+    width: 50%;
+    display: inline-block;
+    margin-left: 50px;" focus="true" />
+            </div>
+        </div>
+        <div class="setting_field">
+            <span>Show Notifications</span>
+            <div class="material-switch pull-right">
+                <input id="notifications" name="notifications" type="checkbox" ng-model="$ctrl.showNotifications" ng-true-value="true" ng-false-value="false" />
+                <label for="notifications" class="label-primary"></label>
+            </div>
+        </div>
+        <div class="setting_field">
+            <span>Mute all sounds</span>
+            <div class="material-switch pull-right">
+                <input id="notificationsMute" name="notificationsMute" type="checkbox" ng-model="$ctrl.muteNotification" ng-true-value="true" ng-false-value="false" />
+                <label for="notificationsMute" class="label-primary"></label>
+            </div>
+        </div>
+        <div class="setting_field" ng-if="$ctrl.service.custom_badges">
+            <span>Badge</span>
+            <label ng-repeat="badge in $ctrl.service.custom_badges" class="badge_label">
+                <input type="checkbox" data-checklist-model="$ctrl.service.custom_badges_conf" data-checklist-value="badge"> {{badge.name}}
+            </label>
+        </div>
+    </div>
+    <div class="modal-footer c-modal_footer--default">
+        <a style="cursor: pointer;border: 1px solid rgba(128, 128, 128, 0.32)" class="btn btn_outline dialog_cancel" data-qa="generic_dialog_cancel" ng-click="$ctrl.cancel()">Cancel</a>
+        <button type="submit" style="cursor: pointer" class="btn btn-primary" data-qa="generic_dialog_go" id="add_team" ng-click="$ctrl.addService()">Add</button>
+    </div>
+</form>

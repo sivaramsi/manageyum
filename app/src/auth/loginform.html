@@ -1,0 +1,35 @@
+<div class="container-fluid authcontainer">
+    <div class="omb_login">
+        <!-- <h3 class="omb_authTitle">Login or <a href="#" ui-sref="auth.register">Sign up</a></h3> -->
+        <div class="row omb_row-sm-offset-3 omb_loginOr">
+            <div class="col-xs-12 col-sm-6 text-center">
+                <img src="./images/applogo.svg" class="applogo" />
+            </div>
+        </div>
+        <div class="row omb_row-sm-offset-3 omb_loginOr" ng-if="$ctrl.errorMessage">
+            <div class="col-xs-12 col-sm-6">
+                <div class="alert alert-danger">
+                    {{$ctrl.errorMessage}}
+                </div>
+            </div>
+        </div>
+        <div class="row omb_row-sm-offset-3">
+            <div class="col-xs-12 col-sm-6">
+                <form class="omb_loginForm" autocomplete="off" ng-submit="$ctrl.login()">
+                    <div class="input-group">
+                        <input type="text" class="form-control auth-input1" name="username" ng-model="$ctrl.email" placeholder="Email Address">
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="form-control auth-input2" name="password" ng-model="$ctrl.password" placeholder="Password">
+                    </div>
+                    <span class="help-block"><!-- <span>Password error</span> --></span>
+                    <button class="btn btn-lg btn-block auth-btn" type="submit" ladda="$ctrl.loading" ng-disabled="!$ctrl.email || !$ctrl.password" analytics-on="click" analytics-event="user_login">Login</button>
+                    <div class="text-center form-extra">
+                        <div><a ui-sref="auth.forgotpassword"> Forgot your password?</a></div>
+                        <div><a ui-sref="auth.register">New User?</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

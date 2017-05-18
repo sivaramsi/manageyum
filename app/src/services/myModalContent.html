@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add Service...</h3>
+</div>
+<form>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="userGroupName" class="bm0">Name</label>
+            <input type="text" ng-model="vm.name" class="form-control" id="teamName" style="font-weight: 700;
+    font-size: 18px;
+    height: 30px;
+    width: 50%;
+    display: inline-block;
+    margin-left: 41px;" focus="true" />
+        </div>
+        <div class="form-group" ng-if="$ctrl.service.isTeamRequired">
+            <label for="userGroupName" class="bm0">domain</label>
+            <input type="text" ng-model="vm.domain" class="form-control" id="teamDomain" style="    font-weight: 700;
+    font-size: 16px;
+    height: 30px;
+    width: 40%;
+    display: inline-block;
+    margin-left: 30px;" focus="true" />
+            <span>{{$ctrl.service.serviceURL}}</span>
+        </div>
+    </div>
+    <div class="modal-footer c-modal_footer--default">
+        <a style="cursor: pointer;border: 1px solid rgba(128, 128, 128, 0.32)" class="btn btn_outline dialog_cancel" data-qa="generic_dialog_cancel" ng-click="$ctrl.cancel()">Cancel</a>
+        <button type="submit" style="cursor: pointer" class="btn dialog_go" data-qa="generic_dialog_go" id="add_team" ng-click="$ctrl.addService()">Add</button>
+    </div>
+</form>

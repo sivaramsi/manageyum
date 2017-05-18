@@ -1,0 +1,34 @@
+<div class="modal-header text-center">
+    <span class="modal-title text-center">Help us spread the word! </span>
+    <span class="pull-right" ng-click="$ctrl.cancel()">
+<img src="./images/close.svg" style="    opacity: .5;    width: 14px;
+    height: 14px; cursor: pointer;">
+    </span>
+</div>
+<form>
+    <div class="modal-body">
+        <div class="text-center" style="    padding: 20px;"><span>Tell your friends and colleagues how awesome manageyum is</span></div>
+        <div class="row" style="display: flex;padding: 16px;">
+            <div class="col-md-4 share_app_cont text-center" ng-click="$ctrl.share('facebook')" style="cursor: pointer;">
+                <div class="share_app_icon_cont" style="    padding-top: 12px;
+    background: #6D82B9;">
+                    <img src="./images/facebook.svg" class="share_app_icon">
+                </div>
+                <span class="share_body">Share on Facebook</span>
+            </div>
+            <div class="col-md-4 share_app_cont text-center" ng-click="$ctrl.share('twitter')" style="cursor: pointer;">
+                <div class="share_app_icon_cont" style="    padding-top: 12px;
+    background: #01B8FF;">
+                    <img src="./images/twitter.svg" class="share_app_icon">
+                </div>
+                <span class="share_body"> Share on Twitter</span>
+            </div>
+            <div class="col-md-4 share_app_cont" style="cursor: pointer;">
+                <div class="share_app_icon_cont text-center" style="    padding-top: 12px;
+    background: #9199A3;">
+                    <img src="./images/envelope.svg" class="share_app_icon" ng-click="$ctrl.share('email')">
+                </div>
+                <span class="share_body">Send as Email</span>
+            </div>
+        </div>
+</form>

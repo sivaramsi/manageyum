@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h3 class="modal-title" ng-if="$ctrl.mustUpgrade">Its time to upgrade!!!</h3>
+    <h3 class="modal-title" ng-if="!$ctrl.mustUpgrade">placeholder required</h3>
+</div>
+<form>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="userGroupName" class="bm0" ng-if="$ctrl.mustUpgrade">It seems your trail has expired. You can either buy a pro plan to continue or you can get pro plan by recommending manageyum to 5 of your friends</label>
+            <label for="userGroupName" class="bm0" ng-if="!$ctrl.mustUpgrade">You are using a trail of pro plan, you have {{$ctrl.expiryDate}}. You can continue using  pro plan by buying it  or you can get pro plan by recommending manageyum to 5 of your friends  </label>
+        </div>
+    </div>
+    <div class="modal-footer c-modal_footer--default">
+        <a style="cursor: pointer;border: 1px solid rgba(128, 128, 128, 0.32)" class="btn btn_outline dialog_cancel" data-qa="generic_dialog_cancel" ng-click="$ctrl.referFriends()">Refer friends</a>
+        <button type="submit" style="cursor: pointer" class="btn dialog_go" data-qa="generic_dialog_go" id="add_team" ng-click="$ctrl.buyNow()">Yeah Let Me Buy</button>
+    </div>
+</form>

@@ -1,0 +1,40 @@
+<div class="notifications_cont">
+    <div class="list-group notification_list">
+        <div class="empty_state my_modal_title overview_heading">
+            <h3 style="margin: 0">Overview</h3>
+        </div>
+        <ul style="list-style-type: none;" class="overview_list">
+            <div class="panel panel-default" ng-repeat="service in $ctrl.notifications">
+                <div class="panel-heading notifications_header">
+                    <div class="notifications_service_image">
+                        <img ng-src="images/services/{{service.name}}.{{service.logo_ext}}">
+                    </div>
+                    <div class="notifications_service_name">
+                        {{service.label}}
+                    </div>
+                    <div class="notification_service_count">
+                        <img src="./images/close.svg" class="notification_close" ng-click="$ctrl.closeNotification(service)" />
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="notifications_body" ng-repeat="notification in service.notifications" ng-click="$ctrl.onNotificationClick(service,notification)" analytics-on="click" analytics-event="overview_notification">
+                        <div class="notification_image">
+                            <img ng-src="{{notification.options.icon}}">
+                        </div>
+                        <div class="notification_content">
+                            <div class="notification_title">{{notification.title}}</div>
+                            <div class="notification_text">{{notification.options.body}} </div>
+                            <div class="notification_timestamp">{{notification.timestamp | date:"hh:mm a" }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="empty_state text-center overview_empty_state" ng-if="$ctrl.notifications.length===0">
+                <span class="empty_state_text">No New Notifications </span>
+            </div>
+        </ul>
+    </div>
+    <!-- <div class="share_btn">
+        <img class="share_btn_img" analytics-on="click" analytics-event="share_btn" ng-click="$ctrl.openShareModal()" src="./images/heart.svg" />
+    </div> -->
+</div>

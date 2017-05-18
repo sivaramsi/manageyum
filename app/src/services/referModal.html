@@ -1,0 +1,52 @@
+<div class="modal-header text-center">
+    <span class="modal-title text-center">Refer your friends </span>
+    <span class="pull-right" ng-click="$ctrl.cancel()" ng-if="!$ctrl.disableClose">
+<img src="./images/close.svg" style="    opacity: .5;    width: 14px;
+    height: 14px; cursor: pointer;">
+    </span>
+</div>
+<form>
+    <div class="modal-body">
+        <div class="form-group" style="    padding-left: 30px;" ng-if="!$ctrl.referralLink">   <label for="userGroupName" class="bm0">Your email</label>
+            <input type="text" ng-model="$ctrl.email" class="form-control" id="teamName" style="font-weight: 700;
+    font-size: 18px;
+    height: 30px;
+    width: 50%;
+    display: inline-block;
+    margin-left: 41px;" focus="true" />
+        </div>
+        <div class="form-group" style="    padding-left: 30px;" ng-if="$ctrl.referralLink">
+            <label for="userGroupName" class="bm0">Your Referral Link : <span ng-bind-html="$ctrl.referralLink | linky:'_blank'"></span> </label>
+        </div>
+        <div class="form-group" style="    padding-left: 30px;" ng-if="$ctrl.downloads">
+            <label for="userGroupName" class="bm0">{{$ctrl.downloads.length}} people have downloaded from your referral link</label>
+        </div>
+
+        <div class="row" style="display: flex;padding: 16px;" ng-if="$ctrl.referralLink">
+            <div class="col-md-4 share_app_cont text-center" ng-click="$ctrl.share('facebook')" style="cursor: pointer;">
+                <div class="share_app_icon_cont" style="    padding-top: 12px;
+    background: #6D82B9;">
+                    <img src="./images/facebook.svg" class="share_app_icon">
+                </div>
+                <span class="share_body">Share on Facebook</span>
+            </div>
+            <div class="col-md-4 share_app_cont text-center" ng-click="$ctrl.share('twitter')" style="cursor: pointer;">
+                <div class="share_app_icon_cont" style="    padding-top: 12px;
+    background: #01B8FF;">
+                    <img src="./images/twitter.svg" class="share_app_icon">
+                </div>
+                <span class="share_body"> Share on Twitter</span>
+            </div>
+            <div class="col-md-4 share_app_cont" style="cursor: pointer;">
+                <div class="share_app_icon_cont text-center" style="    padding-top: 12px;
+    background: #9199A3;">
+                    <img src="./images/envelope.svg" class="share_app_icon" ng-click="$ctrl.share('email')">
+                </div>
+                <span class="share_body">Send as Email</span>
+            </div>
+        </div>
+
+</form>
+<div class="modal-footer c-modal_footer--default">
+    <button ng-if="!$ctrl.referralLink" type="submit" style="cursor: pointer" class="btn btn-primary" data-qa="generic_dialog_go" id="add_team" ng-click="$ctrl.generateReferalLink()" ng-disabled="!$ctrl.email">Generate Referral link</button>
+</div>

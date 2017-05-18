@@ -1,0 +1,52 @@
+<div class="electronSearchText-box">
+    <input type="text" class="electronSearchText-input">
+    <span class="electronSearchText-count"></span>
+</div>
+<uib-tabset active="$ctrl.active" class="tab-list main_tabs">
+    <uib-tab index="0" ng-click="$ctrl.setHomeNavIndex(1)" select="$ctrl.setWindowTitle('overview')" class="home_tab_menu">
+        <uib-tab-heading>
+            <img src="./images/applogo.svg" class="menu_app_logo" />
+            <span class="notification-count" ng-if="$ctrl.overallNotificationCount>0">{{ $ctrl.overallNotificationCount | overflowCount}}</span>
+            <span ng-if="$ctrl.showHelperCounts" class="shortcut-helper">1</span>
+        </uib-tab-heading>
+        <home navindex="$ctrl.navindex"></home>
+    </uib-tab>
+    <uib-tab sortable-tab index="service.uuid" ng-if="service.isActive" ng-repeat="service in $ctrl.userServices track by service.uuid" disabled="service.disabled" select="$ctrl.clearNotifications(service)" deselect="$ctrl.deselectService(service)" analytics-on="click" analytics-event="switch_services" class="service_tab_menu" serviceid="{{service.uuid}}">
+        <uib-tab-heading>
+            <span ng-if="!$ctrl.getIsRefreshing(service.uuid)">
+            <img class="heading_logo" ng-src="images/services/{{service.name}}.{{service.logo_ext}}" ng-if="!service.favicon" />
+            <img class="heading_logo" ng-src="{{service.favicon}}" ng-if="service.favicon" />
+            </span>
+            <img class="heading_logo" ng-src="images/rolling.gif" ng-if="$ctrl.getIsRefreshing(service.uuid)" />
+            <span class="tab-service-name">{{service.label | labelParser}}</span>
+            <span class="notification-count" ng-if="service.notification.count">{{service.notification.count | overflowCount}}</span>
+            <span class="notification-count_indirect" ng-if="!service.notification.count && service.notification.count_indirect>0">     &#x25CF;
+</span>
+            <span ng-if="$ctrl.showHelperCounts" class="shortcut-helper">{{$ctrl.getHelperCounts($index)}}</span>
+        </uib-tab-heading>
+        <div id="service_views_cont_{{service.uuid}}" class="service_views_cont">
+            <div ng-if="$ctrl.banner" class="banner_custom">
+                <span ng-bind-html="$ctrl.banner.text | linky:'_blank'"></span>
+                <span class="pull-right close-banner close-btn-service-list" ng-click="$ctrl.closeBanner($ctrl.banner)"><img src="./images/cross.png">
+                </span>
+            </div>
+        </div>
+    </uib-tab>
+</uib-tabset>
+<div class="nav-settings ">
+    <button type="button " class="btn btn-default glyphicon glyphicon-chevron-left" style="width: 33px;" uib-tooltip="Back" tooltip-placement="bottom" ng-click="$ctrl.backwardHistory()"></button>
+    <button type="button " class="btn btn-default glyphicon glyphicon-chevron-right" style="width: 33px;" uib-tooltip="Forward" tooltip-placement="bottom" ng-click="$ctrl.forwardHistory()"></button>
+    <button type="button " class="btn btn-default " style="width: 33px;" uib-tooltip="Notifications {{$ctrl.globalNotification?'on':'off'}}" tooltip-placement="bottom" ng-click="$ctrl.toggleNotification()"><img src="./images/notification_on.svg" ng-if="$ctrl.globalNotification ===true" /><img src="./images/notification_off.svg" ng-if="$ctrl.globalNotification ===false" /></button>
+    <button type="button " class="btn btn-default " ng-click="$ctrl.setHomeNavIndex(2)" uib-tooltip="Settings" tooltip-placement="bottom"><img src="./images/cog.svg" /></button>
+    <button type="button " class="btn btn-default " ng-click="$ctrl.setAddServices(true)" uib-tooltip="New Service" tooltip-placement="bottom"><img src="./images/add.svg" /></button>
+    <button type="button " style="width: 42px;" class="btn btn-default " ng-click="$ctrl.showShareModal(true)" uib-tooltip="Share" tooltip-placement="bottom"><img src="./images/heart.svg" /></button>
+</div>
+<div class="main_loading">
+    <div class="load_cont">
+        <div class="app_title"><img style="opacity: .24" src="./images/loading.gif"></div>
+        <div class="loading_app_name_cont" id="loading_app_name_cont"></div>
+    </div>
+</div>
+<div class="service_add_cont" ng-if="$ctrl.showAddServices">
+    <serviceslist></serviceslist>
+</div>

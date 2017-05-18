@@ -1,0 +1,32 @@
+<div class="modal-header text-center">
+    <span class="modal-title text-center">Register your License </span>
+    <span class="pull-right" ng-click="$ctrl.cancel()" ng-if="!$ctrl.disableClose">
+<img src="./images/close.svg" style="    opacity: .5;    width: 14px;
+    height: 14px; cursor: pointer;">
+    </span>
+</div>
+<form>
+    <div class="modal-body">
+        <h4 class="text-center">Product key can be purchased from <a href="https://manageyum.com/pricing.html" target="_blank">manageyum.com</a></h4>
+        <div class="form-group" style="    padding-left: 30px;">
+            <label for="userGroupName" class="bm0">Your email</label>
+            <input type="text" ng-model="$ctrl.email" class="form-control" id="teamName" style="font-weight: 700;
+    font-size: 18px;
+    height: 30px;
+    width: 50%;
+    display: inline-block;
+    margin-left: 81px;" focus="true" />
+        </div>
+        <div class="form-group" style="    padding-left: 30px;">
+            <label for="userGroupName" class="bm0">Your Product key</label>
+            <input type="text" ng-model="$ctrl.appKey" class="form-control" id="teamName" style="font-weight: 700;
+    font-size: 18px;
+    height: 30px;
+    width: 50%;
+    display: inline-block;
+    margin-left: 41px;" focus="true" />
+        </div>
+</form>
+<div class="modal-footer c-modal_footer--default">
+    <button type="submit" style="cursor: pointer" class="btn btn-primary" data-qa="generic_dialog_go" id="add_team" ng-click="$ctrl.registerProduct()" ng-disabled="!$ctrl.email || !$ctrl.appKey">Register</button>
+</div>

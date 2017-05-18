@@ -1,0 +1,24 @@
+<div class="empty_state my_modal_title">
+    <h3 style="color: #495259;">Add a service</h3>
+</div>
+<span class="pull-right close-btn-service-list" ng-click="$ctrl.close()" style="width: 20px;    cursor: pointer;"><img src="./images/close.svg">
+<span>esc</span>
+</span>
+<div class="container" style="    padding-top: 30px;">
+    <div class="col-md-12">
+        <div class="row service_row">
+            <a target="_blank" class="featured-app" ng-if="!service.is_custom_app" ng-repeat="service in $ctrl.availableServices | orderBy:'name'" ng-click="$ctrl.openAddServiceModal(service)">
+                <div class="featured-app-logo-wrapper">
+                    <img class="featured-app-logo" ng-src="images/services/{{service.name}}.{{service.logo_ext}}" alt="Atom">
+                </div>
+                <div class="featured-app-name">{{service.name | labelParser}}</div>
+            </a>
+            <a target="_blank" class="featured-app" ng-click="$ctrl.openAddServiceModal($ctrl.customService)">
+                <div class="featured-app-logo-wrapper">
+                    <img class="featured-app-logo" ng-src="images/services/{{$ctrl.customService.name}}.{{$ctrl.customService.logo_ext}}" alt="Custom">
+                </div>
+                <div class="featured-app-name">{{$ctrl.customService.name | labelParser}}</div>
+            </a>
+        </div>
+    </div>
+</div>

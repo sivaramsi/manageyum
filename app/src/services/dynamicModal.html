@@ -1,0 +1,9 @@
+<div class="modal-header">
+    <span class="modal-title">{{$ctrl.title}}</span>
+</div>
+<form>
+    <div class="modal-body" ng-bind-html="$ctrl.body | linky:'_blank'">
+    </div>
+    <div class="modal-footer c-modal_footer--default">
+    </div>
+</form>

@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <span class="modal-title">Delete Profile</span>
+</div>
+<form>
+    <div class="modal-body">
+        <div class="form-group" style="    padding-left: 30px;">
+            Are you sure you want to delete this profile? this action cannot be undone.
+        </div>
+    </div>
+    <div class="modal-footer c-modal_footer--default">
+        <a style="cursor: pointer;border: 1px solid rgba(128, 128, 128, 0.32)" class="btn btn_outline dialog_cancel" data-qa="generic_dialog_cancel" ng-click="$ctrl.cancel()">Cancel</a>
+        <button type="button" style="cursor: pointer" class="btn btn-danger" data-qa="generic_dialog_go" ng-click="$ctrl.deleteProfile()" analytics-on="click" analytics-event="delete_profile">Delete</button>
+    </div>
+</form>

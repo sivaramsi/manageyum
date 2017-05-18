@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <span class="modal-title">Subscribe to our updates</span>
+</div>
+<form>
+    <div class="modal-body">
+        <div class="form-group" style="    padding-left: 30px;">
+            <label for="userGroupName" class="bm0">Email</label>
+            <input type="text" ng-model="$ctrl.email" class="form-control" id="teamName" style="font-weight: 700;
+    font-size: 18px;
+    height: 30px;
+    width: 50%;
+    display: inline-block;
+    margin-left: 41px;" focus="true" autofocus="true" />
+        </div>
+    </div>
+    <div class="modal-footer c-modal_footer--default">
+        <a style="cursor: pointer;border: 1px solid rgba(128, 128, 128, 0.32)" class="btn btn_outline dialog_cancel" data-qa="generic_dialog_cancel" ng-click="$ctrl.cancel()">Cancel</a>
+        <button type="submit" style="cursor: pointer" class="btn btn-primary" data-qa="generic_dialog_go" id="add_team" ng-click="$ctrl.doSubscribe()" analytics-on="click" analytics-event="subscribe_email">Subscribe</button>
+    </div>
+</form>

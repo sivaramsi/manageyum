@@ -1,0 +1,12 @@
+<div class="container" style="    padding-top: 60px;">
+    <div class="col-md-12">
+        <div class="row">
+            <a target="_blank" class="featured-app" ng-repeat="service in $ctrl.availableServices" ng-click="$ctrl.openAddServiceModal(service)">
+                <div class="featured-app-logo-wrapper">
+                    <img class="featured-app-logo" ng-src="images/services/{{service.name}}.{{service.logo_ext}}" alt="Atom">
+                </div>
+                <div class="featured-app-name">{{service.name}}</div>
+            </a>
+        </div>
+    </div>
+</div>

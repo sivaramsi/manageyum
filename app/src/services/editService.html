@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <img ng-src="images/services/{{$ctrl.service.name}}.{{$ctrl.service.logo_ext}}" />
+    <span class="modal-title">Edit {{$ctrl.service.name}}</span>
+</div>
+<form>
+    <div class="modal-body">
+        <div class="form-group" style="    padding-left: 30px;">
+            <label for="userGroupName" class="bm0">Name</label>
+            <input type="text" ng-model="$ctrl.service.label" class="form-control" id="teamName" style="font-weight: 700;
+    font-size: 18px;
+    height: 30px;
+    width: 50%;
+    display: inline-block;
+    margin-left: 41px;" focus="true" autofocus="true" />
+            <span style="    display: block;
+    margin-left: 82px;
+    color: red;" ng-if="$ctrl.nameError">Name is already used by some other service.</span>
+        </div>
+        <div class="setting_field">
+            <span>Enable Service</span>
+            <div class="material-switch pull-right">
+                <input id="serviceEnable" name="serviceEnable" type="checkbox" ng-model="$ctrl.service.isActive" ng-true-value="true" ng-false-value="false" />
+                <label for="serviceEnable" class="label-primary"></label>
+            </div>
+        </div>
+        <div class="setting_field">
+            <span>Show Notifications</span>
+            <div class="material-switch pull-right">
+                <input id="notifications" name="notifications" type="checkbox" ng-model="$ctrl.service.showNotifications" ng-true-value="true" ng-false-value="false" />
+                <label for="notifications" class="label-primary"></label>
+            </div>
+        </div>
+        <div class="setting_field">
+            <span>Mute all sounds</span>
+            <div class="material-switch pull-right">
+                <input id="notificationsMute" name="notificationsMute" type="checkbox" ng-model="$ctrl.service.muteNotification" ng-true-value="true" ng-false-value="false" />
+                <label for="notificationsMute" class="label-primary"></label>
+            </div>
+        </div>
+        <div class="setting_field" ng-if="$ctrl.service.custom_badges">
+            <span>Badge</span>
+            <label ng-repeat="badge in $ctrl.service.custom_badges" class="badge_label">
+                <input type="checkbox" data-checklist-model="$ctrl.service.custom_badges_conf" data-checklist-value="badge"> {{badge.name}}
+            </label>
+        </div>
+    </div>
+    <div class="modal-footer c-modal_footer--default">
+        <button type="button" uib-popover-template="'myPopoverTemplate.html'" popover-title="Are you sure, you want to delete it?" popover-is-open="$ctrl.popoverOpen" style="cursor: pointer" class="btn btn-danger pull-left" data-qa="generic_dialog_go" analytics-on="click" analytics-event="delete_service">Delete</button>
+        <a style="cursor: pointer;border: 1px solid rgba(128, 128, 128, 0.32)" class="btn btn_outline dialog_cancel" data-qa="generic_dialog_cancel" ng-click="$ctrl.cancel()">Cancel</a>
+        <button type="submit" style="cursor: pointer" class="btn btn-primary" data-qa="generic_dialog_go" id="add_team" ng-click="$ctrl.saveService()" analytics-on="click" analytics-event="update_service">Save</button>
+    </div>
+</form>
+<script type="text/ng-template" id="myPopoverTemplate.html">
+    <div class="form-group text-center">
+        <button class="btn btn-sm btn-danger" ng-click="$ctrl.deleteService()">Yes</button>
+        <button class="btn btn-sm btn_outline" ng-click="$ctrl.popoverOpen=false">No</button>
+    </div>
+</script>

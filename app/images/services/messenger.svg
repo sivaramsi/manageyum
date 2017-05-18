@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.7.2 (28276) - http://www.bohemiancoding.com/sketch -->
+    <title>messenger</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0 79.9158763 0 79.9158763 80.4123711 0 80.4123711"></polygon>
+    </defs>
+    <g id="icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="messenger">
+            <g id="Page-1">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M43.9289897,50.1336495 L33.7533196,39.2136495 L13.8984742,50.1336495 L35.7388866,26.8041649 L46.1628041,37.7241649 L65.7694021,26.8041649 L43.9289897,50.1336495 Z M39.9578557,4.12371134e-05 C17.8898144,4.12371134e-05 -8.24742268e-05,16.6672577 -8.24742268e-05,37.2280825 C-8.24742268e-05,48.9435464 5.81063918,59.3938557 14.8910515,66.2177732 L14.8910515,80.4124124 L28.4964124,72.8990103 C32.1273402,73.9101443 35.9739381,74.4557113 39.9578557,74.4557113 C62.0263093,74.4557113 79.9162062,57.7884948 79.9162062,37.2280825 C79.9162062,16.6672577 62.0263093,4.12371134e-05 39.9578557,4.12371134e-05 L39.9578557,4.12371134e-05 Z" id="Fill-1" fill="#0083FF" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

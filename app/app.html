@@ -1,0 +1,63 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <title>Manageyum</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="node_modules/ladda/dist/ladda-themeless.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+
+    <!-- endbuild -->
+</head>
+
+<body ng-app="puraApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <ui-view></ui-view>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="node_modules/jquery/dist/jquery.js" onload="window.$ = window.jQuery = module.exports;"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angulartics/dist/angulartics.min.js"></script>
+    <script src="node_modules/angulartics-mixpanel/dist/angulartics-mixpanel.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="node_modules/angular-ui-router/release/stateEvents.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
+    <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="node_modules/lodash/lodash.js"></script>
+    <script src="node_modules/angular-electron/angular-electron.js"></script>
+    <script src="node_modules/angular-stripe-checkout/angular-stripe-checkout.js"></script>
+    <script src="node_modules/ladda/dist/spin.min.js"></script>
+    <script src="node_modules/ladda/dist/ladda.min.js"></script>
+    <script src="node_modules/angular-ladda/dist/angular-ladda.min.js"></script>
+    <script src="node_modules/angular-hotkeys/build/hotkeys.min.js"></script>
+    <script src="node_modules/checklist-model/checklist-model.js"></script>
+    <script src="node_modules/angular-md5/angular-md5.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="./app.js"></script>
+    <script src="src/app.js"></script>
+    <script src="src/services/services.controller.js"></script>
+    <script src="src/services/services.factory.js"></script>
+    <script src="src/home/home.controller.js"></script>
+    <script src="src/servicesList/servicesList.controller.js"></script>
+    <script src="src/enabledServices/enabledServices.controller.js"></script>
+    <script src="src/notificationcenter/notificationCenter.controller.js"></script>
+    <script src="src/services/user.factory.js"></script>
+    <!-- end Mixpanel -->
+    <!-- endbuild -->
+</body>
+
+</html>
