@@ -81,11 +81,12 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
                 let nextService = clonedServices.shift();
                 if (nextService) {
                     let tabsPane = $('#service_views_cont_' + nextService.uuid).parent()[0];
+                    let delay = nextService.name === 'skype'?30000:300;
                     if (tabsPane.className.indexOf('active') == -1) {
                         $(tabsPane).addClass('tabspane-pull-right');
                         setTimeout(() => {
                             $(tabsPane).removeClass('tabspane-pull-right');
-                        }, 300);
+                        }, delay);
                     }
                     var tabHeight = $('.nav.nav-tabs').height();
                     $('.service_views').height($(window).height() - tabHeight);
@@ -166,9 +167,9 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
 
     function checkSupportedVersion() {
         var appVersion = window.appVersion;
-        User.getLastSupportedVersion().then(function(snapshot) {
-            if (snapshot && snapshot.val()) {
-                var isAppMustWithinSupport = semver.gte(appVersion, snapshot.val());
+        User.getLastSupportedVersion().then(function(response) {
+            if (response.data.minVersion) {
+                var isAppMustWithinSupport = semver.gte(appVersion, response.data.minVersion);
                 if (!isAppMustWithinSupport) {
                     showUnSupportedPopup();
                 }
@@ -177,9 +178,9 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
     }
 
     function checkForBanners() {
-        User.getBanner().then(function(snapshot) {
-            if (snapshot && snapshot.val()) {
-                var banner = snapshot.val();
+        User.getBanner().then(function(response) {
+            if (response.data.banner) {
+                var banner = response.data.banner;
                 var isAlreadyClosed = User.isBannerClosed(banner.id);
                 if (banner && !isAlreadyClosed) {
                     self.banner = banner;
@@ -191,7 +192,7 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
 
 
     function showUnSupportedPopup() {
-        User.getModalContent().then(function(snapshot) {
+        User.getModalContent().then(function(response) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -203,7 +204,7 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
                 keyboard: false,
                 resolve: {
                     modalContent: function() {
-                        return snapshot.val();
+                        return response.data;
                     }
                 }
             });
@@ -767,6 +768,13 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
         }
     });
 
+    ipcRenderer.on('clearCache', function(event, args) {
+        var webview = getActiveWebview();
+        if (webview) {
+            webview.reloadIgnoringCache();
+        }
+    });
+
     ipcRenderer.on('forwardHistory', function(event, args) {
         self.forwardHistory();
     });
@@ -794,6 +802,14 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
     }
 
     this.clearNotifications = function(service) {
+
+        let tabsPane = $('#service_views_cont_' + service.uuid).parent()[0];
+        if(tabsPane){
+            $(tabsPane).removeClass('tabspane-pull-right');
+        }
+
+
+
         User.removeNotification(service);
         let webview = document.getElementsByName(service.uuid)[0];
 
@@ -1175,6 +1191,7 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
 
     function checkForPromotion() {
         var lastShownDate = User.getLastPromoShown();
+        getTrialBanner();
         if (lastShownDate == null) {
             showUpgradeModal(false);
             User.setLastPromoShown(Date.now());
@@ -1190,7 +1207,25 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
                 return;
             }
         }
+    }
 
+
+    function getTrialBanner() {
+        let currentPlan = User.getCurrentPlan();
+        let expiryDate = getExpiredDate(currentPlan.expiration);
+        if (expiryDate < 5) {
+            let banner = {};
+            banner.text = `You trial expires in ${expiryDate} days.Check our plans https://manageyum.com/pricing.html`;
+            self.banner = banner;
+        }
+    }
+
+
+    function getExpiredDate(dateStr) {
+        var expiryDate = new Date(dateStr);
+        var oneDay = 24 * 60 * 60 * 1000;
+        var diffDays = Math.round(Math.abs((expiryDate.getTime() - Date.now()) / (oneDay)));
+        return diffDays;
     }
 
     function checkValidity() {
@@ -1201,6 +1236,7 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
                 User.setCurrentPlan(response.data);
                 if (response.data.plan == 'pro' && isExpired(response.data.expiration)) {
                     showUpgradeModal(true);
+                    self.mustUpgrade = true;
                     return;
                 }
                 if (response.data.plan == 'pro') {
@@ -1292,11 +1328,17 @@ angular.module('puraApp').controller('upgradeModalController', function($uibModa
         $uibModalInstance.close('referFriends');
     };
 
+    $ctrl.continue = function() {
+        if(!$ctrl.mustUpgrade){
+            $uibModalInstance.close('continue');
+        }
+    };
+
     $ctrl.getDaysLeft = function(dateStr) {
         var expiryDate = new Date(dateStr);
         var oneDay = 24 * 60 * 60 * 1000;
         var diffDays = Math.round(Math.abs((expiryDate.getTime() - Date.now()) / (oneDay)));
-        return diffDays + ' days left';
+        return diffDays + ' ';
     };
     if (!mustUpgrade) {
         $ctrl.expiryDate = $ctrl.getDaysLeft($ctrl.currentPlan.expiration);

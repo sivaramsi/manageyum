@@ -24,7 +24,9 @@ function User(localStorageService, $rootScope, $http) {
         },
         getActiveServices: function() {
             let services = this.getServices();
-            return _.filter(services, { isActive: true });
+            return _.filter(services, {
+                isActive: true
+            });
         },
         updateServices: function(services) {
             return localStorageService.set('userservices', services);
@@ -33,7 +35,9 @@ function User(localStorageService, $rootScope, $http) {
             return notificationCenter;
         },
         setNotification: function(service, newNotification) {
-            var oldService = _.find(notificationCenter, { uuid: service.uuid });
+            var oldService = _.find(notificationCenter, {
+                uuid: service.uuid
+            });
             if (!oldService) {
                 oldService = service;
                 oldService.notifications = [];
@@ -49,16 +53,22 @@ function User(localStorageService, $rootScope, $http) {
             $rootScope.$broadcast('refreshNotificationCenter', newNotification);
         },
         removeNotification: function(service) {
-            var oldService = _.find(notificationCenter, { uuid: service.uuid });
+            var oldService = _.find(notificationCenter, {
+                uuid: service.uuid
+            });
             var index = notificationCenter.indexOf(oldService);
             if (index > -1) {
                 notificationCenter.splice(index, 1);
             }
-            $rootScope.$broadcast('refreshNotificationCenter', { test: 'test' });
+            $rootScope.$broadcast('refreshNotificationCenter', {
+                test: 'test'
+            });
         },
         updateService: function(service) {
             var existingServices = localStorageService.get('userservices');
-            let index = _.findIndex(existingServices, { uuid: service.uuid });
+            let index = _.findIndex(existingServices, {
+                uuid: service.uuid
+            });
             delete service['notifications'];
             existingServices[index] = service;
             localStorageService.set('userservices', existingServices);
@@ -67,8 +77,12 @@ function User(localStorageService, $rootScope, $http) {
         },
         updateProfileService: function(profileId, service) {
             let profiles = this.getProfiles();
-            let profile = _.find(profiles, { uuid: profileId });
-            let index = _.findIndex(profile.services, { uuid: service.uuid });
+            let profile = _.find(profiles, {
+                uuid: profileId
+            });
+            let index = _.findIndex(profile.services, {
+                uuid: service.uuid
+            });
             profile.services[index] = service;
             localStorageService.set('profiles', profiles);
             $rootScope.$broadcast('serviceUpdated', service);
@@ -93,13 +107,17 @@ function User(localStorageService, $rootScope, $http) {
         updateProfile: function(profile) {
             var existingProfiles = localStorageService.get('profiles');
             // let oldProfile = _.find(existingProfiles, { uuid: profile.uuid });
-            let index = _.findIndex(existingProfiles, { uuid: profile.uuid });
+            let index = _.findIndex(existingProfiles, {
+                uuid: profile.uuid
+            });
             existingProfiles[index] = profile;
             localStorageService.set('profiles', existingProfiles);
         },
         deleteProfile: function(profile) {
             var existingProfiles = localStorageService.get('profiles');
-            let index = _.findIndex(existingProfiles, { uuid: profile.uuid });
+            let index = _.findIndex(existingProfiles, {
+                uuid: profile.uuid
+            });
             existingProfiles.splice(index, 1);
             localStorageService.set('profiles', existingProfiles);
             $rootScope.$broadcast('profileDeleted', profile);
@@ -111,34 +129,32 @@ function User(localStorageService, $rootScope, $http) {
             var profileId = localStorageService.get('lastSelectedProfile');
             if (profileId) {
                 let profiles = this.getProfiles();
-                let profile = _.find(profiles, { uuid: profileId });
+                let profile = _.find(profiles, {
+                    uuid: profileId
+                });
                 return profile;
             }
             return null;
         },
         deleteService: function(service) {
             var existingServices = localStorageService.get('userservices');
-            let index = _.findIndex(existingServices, { uuid: service.uuid });
+            let index = _.findIndex(existingServices, {
+                uuid: service.uuid
+            });
             existingServices.splice(index, 1);
             localStorageService.set('userservices', existingServices);
             $rootScope.$broadcast('serviceDeleted', service);
         },
         getLastSupportedVersion: function() {
-            return  new Promise((resolve,reject)=>{
-              reject('config node')
-            });
+            return $http.get(SERVER_URL + 'minversion');
             // return firebase.database().ref('/app/minversion').once('value');
         },
         getModalContent: function() {
-          return  new Promise((resolve,reject)=>{
-            reject('config node')
-          });
+            return $http.get(SERVER_URL + 'modal');
             // return firebase.database().ref('/modal').once('value');
         },
         getBanner: function() {
-          return  new Promise((resolve,reject)=>{
-            reject('config node')
-          });
+            return $http.get(SERVER_URL + 'banner');
             //return firebase.database().ref('/banner').once('value');
         },
         isBannerClosed: function(bannerId) {
@@ -199,7 +215,9 @@ function User(localStorageService, $rootScope, $http) {
             localStorageService.set('autolaunch', value);
         },
         getUserPlan: function(appInstallHash) {
-            return $http.post(SERVER_URL + 'user', { appInstallHash: appInstallHash });
+            return $http.post(SERVER_URL + 'user', {
+                appInstallHash: appInstallHash
+            });
         },
         setUserPlan: function(plan) {
 
@@ -212,7 +230,9 @@ function User(localStorageService, $rootScope, $http) {
         },
         subscribe: function(emailId) {
             var mailchimpURL = 'https://manageyum.com/mailchimp.php';
-            return $http.post(mailchimpURL, { email: emailId });
+            return $http.post(mailchimpURL, {
+                email: emailId
+            });
         },
         setCurrentPlan: function(plan) {
             localStorageService.set('userPlan', plan);
@@ -232,11 +252,11 @@ function User(localStorageService, $rootScope, $http) {
         getReferralDownloads: function(data) {
             return $http.post(SERVER_URL + 'referral/download_count', data);
         },
-        getLastPromoShown:function(){
-          return localStorageService.get('promoPlansShown');
+        getLastPromoShown: function() {
+            return localStorageService.get('promoPlansShown');
         },
-        setLastPromoShown:function(showedDate){
-          return localStorageService.set('promoPlansShown',showedDate);
+        setLastPromoShown: function(showedDate) {
+            return localStorageService.set('promoPlansShown', showedDate);
         }
     }
 }

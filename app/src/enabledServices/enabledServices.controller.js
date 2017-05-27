@@ -102,7 +102,7 @@ function enabledServicesController($sce, $uibModal, User, $log, Services, User, 
     this.openShareModal = function() {
         $rootScope.$broadcast('openShareModal', {});
 
-    }
+    };
 
 
     this.showSubscription = function() {
@@ -114,7 +114,7 @@ function enabledServicesController($sce, $uibModal, User, $log, Services, User, 
             controller: 'subscriptionCtrl',
             controllerAs: '$ctrl'
         });
-    }
+    };
 
     this.showReferral = function(disableClose) {
         var modalInstance = $uibModal.open({
@@ -130,7 +130,7 @@ function enabledServicesController($sce, $uibModal, User, $log, Services, User, 
                 }
             }
         });
-    }
+    };
 
     this.showRegistration = function(disableClose) {
         var modalInstance = $uibModal.open({
@@ -146,18 +146,21 @@ function enabledServicesController($sce, $uibModal, User, $log, Services, User, 
                 }
             }
         });
-    }
+    };
 
     this.buyNow = function() {
         window.open('https://manageyum.com/pricing.html', '_blank');
-    }
+    };
 
     this.getExpiredDate = function(dateStr) {
         var expiryDate = new Date(dateStr);
         var oneDay = 24 * 60 * 60 * 1000;
         var diffDays = Math.round(Math.abs((expiryDate.getTime() - Date.now()) / (oneDay)));
-        return diffDays + ' days trial left';
-    }
+        if (diffDays === 1) {
+            diffDays = 0;
+        }
+        return diffDays;
+    };
 
 
     this.clearCache = function() {
@@ -166,7 +169,7 @@ function enabledServicesController($sce, $uibModal, User, $log, Services, User, 
             //some callback.
             console.log('cache cleared');
         });
-    }
+    };
 }
 
 
@@ -276,7 +279,7 @@ angular.module('puraApp').controller('referralCtrl', function($uibModalInstance,
 })
 
 
-angular.module('puraApp').controller('registerModalCtrl', function($uibModalInstance, User, md5, disableClose) {
+angular.module('puraApp').controller('registerModalCtrl', function($uibModalInstance, User, md5, disableClose, remote) {
     var $ctrl = this;
     $ctrl.disableClose = disableClose;
     $ctrl.cancel = function() {
@@ -285,7 +288,6 @@ angular.module('puraApp').controller('registerModalCtrl', function($uibModalInst
 
     $ctrl.registerProduct = function() {
         let appInstallHash = machineId.machineIdSync();
-        console.log('registerProduct');
         User
             .registerProduct({
                 email: $ctrl.email,
@@ -293,7 +295,13 @@ angular.module('puraApp').controller('registerModalCtrl', function($uibModalInst
                 appInstallHash: appInstallHash
             })
             .then((response) => {
-                console.log('registerProduct done');
+                $ctrl.successMessage = 'Your app registered successfully, reloading the app ...';
+                setTimeout(()=>{
+                    remote.getCurrentWindow().reload();
+                },3000);
+            }).
+            catch((err)=>{
+                $ctrl.err = err;
             });
     }
 

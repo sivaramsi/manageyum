@@ -1,8 +1,12 @@
 <div class="container_fluid settings_cont">
+    <div class="promo_banner" ng-if="$ctrl.currentPlan.isTrail">
+        <span class="plan-badge" ng-if="$ctrl.currentPlan.isTrail"><span >Your trial expires in {{$ctrl.getExpiredDate($ctrl.currentPlan.expiration)}} days. <a style="color:#24c5bd" href="http://manageyum.com/pricing.html" target="_blank">Upgrade / Refer friends</a> to enjoy Manageyum to the fullest.</span></span>
+    </div>
     <div class="empty_state" style="
-    color: #C6CAD0;
+    color: #444444;
     font-size: 28px;">
-        <h3 style="font-weight: 300;    padding-left: 30px;">Settings for {{$ctrl.mainLabel}}<span ng-if="$ctrl.currentPlan" class="plan-badge">{{$ctrl.currentPlan.plan }} plan <span ng-if="$ctrl.currentPlan.isTrail">{{$ctrl.getExpiredDate($ctrl.currentPlan.expiration)}}</span></span></h3>
+        <h3 style="font-weight: 300;    padding-left: 30px;">Settings for {{$ctrl.mainLabel}}
+          </h3>
 
     </div>
     <div class="col-md-12">
@@ -15,7 +19,6 @@
             <div class="settings_list">
                 <div class="get_help_btn" ng-click="$ctrl.getHelp()" style="cursor: pointer;">Get Help</div>
                 <div class="get_help_btn" ng-click="$ctrl.buyNow()" style="cursor: pointer;">Buy Now</div>
-                <div class="get_help_btn" ng-click="$ctrl.clearCache()" style="cursor: pointer;">Clear Cache</div>
                 <div class="get_help_btn" ng-click="$ctrl.showSubscription()" style="cursor: pointer;">Subscribe</div>
                 <div class="get_help_btn" ng-click="$ctrl.showReferral(false)" style="cursor :pointer;">Refer Friends</div>
                 <div class="get_help_btn" ng-click="$ctrl.showRegistration(false)" style="cursor: pointer;">Register your license</div>

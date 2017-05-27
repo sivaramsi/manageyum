@@ -7,7 +7,13 @@
 </div>
 <form>
     <div class="modal-body">
-        <h4 class="text-center">Product key can be purchased from <a href="https://manageyum.com/pricing.html" target="_blank">manageyum.com</a></h4>
+        <div class="alert alert-success" role="alert" ng-if="$ctrl.successMessage">
+            {{$ctrl.successMessage}}
+        </div>
+        <div class="alert alert-danger" role="alert" ng-if="$ctrl.err">
+            {{$ctrl.err.data.msg}}
+        </div>
+        <h5 class="text-center">Product key can be purchased from <a href="https://manageyum.com/pricing.html" target="_blank">manageyum.com</a></h5>
         <div class="form-group" style="    padding-left: 30px;">
             <label for="userGroupName" class="bm0">Your email</label>
             <input type="text" ng-model="$ctrl.email" class="form-control" id="teamName" style="font-weight: 700;

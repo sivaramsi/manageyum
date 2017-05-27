@@ -1,16 +1,16 @@
 <div class="modal-header">
-    <h3 class="modal-title" ng-if="$ctrl.mustUpgrade">Its time to upgrade!!!</h3>
-    <h3 class="modal-title" ng-if="!$ctrl.mustUpgrade">placeholder required</h3>
+    <h3 class="modal-title" ng-if="$ctrl.mustUpgrade">Its time to upgrade!</h3>
+    <h3 class="modal-title" ng-if="!$ctrl.mustUpgrade">Welcome to Manageyum</h3>
 </div>
 <form>
     <div class="modal-body">
         <div class="form-group">
-            <label for="userGroupName" class="bm0" ng-if="$ctrl.mustUpgrade">It seems your trail has expired. You can either buy a pro plan to continue or you can get pro plan by recommending manageyum to 5 of your friends</label>
-            <label for="userGroupName" class="bm0" ng-if="!$ctrl.mustUpgrade">You are using a trail of pro plan, you have {{$ctrl.expiryDate}}. You can continue using  pro plan by buying it  or you can get pro plan by recommending manageyum to 5 of your friends  </label>
+            <label for="userGroupName" class="bm0" ng-if="$ctrl.mustUpgrade">Your trail has expired. You can either buy or <a href="http://docs.manageyum.com/article/11-getting-manageyum-for-free" target="_blank"> refer 5 people </a> to manageyum. Mail us at help@manageyum.com if you need help.</label>
+            <label for="userGroupName" class="bm0" ng-if="!$ctrl.mustUpgrade">This is a {{$ctrl.expiryDate}} day(s) trial. You can either buy or<a href="http://docs.manageyum.com/article/11-getting-manageyum-for-free" target="_blank"> refer 5 people </a> to manageyum to remove this limitation. Mail us at help@manageyum.com if you need help. </label>
         </div>
     </div>
     <div class="modal-footer c-modal_footer--default">
-        <a style="cursor: pointer;border: 1px solid rgba(128, 128, 128, 0.32)" class="btn btn_outline dialog_cancel" data-qa="generic_dialog_cancel" ng-click="$ctrl.referFriends()">Refer friends</a>
-        <button type="submit" style="cursor: pointer" class="btn dialog_go" data-qa="generic_dialog_go" id="add_team" ng-click="$ctrl.buyNow()">Yeah Let Me Buy</button>
+        <a style="cursor: pointer;border: 1px solid rgba(128, 128, 128, 0.32)" class="btn btn_outline dialog_cancel" data-qa="generic_dialog_cancel" ng-click="$ctrl.continue()" ng-disabled="$ctrl.mustUpgrade">Continue</a>
+        <button type="submit" style="cursor: pointer" class="btn btn-primary dialog_go" data-qa="generic_dialog_go" id="add_team" ng-click="$ctrl.buyNow()">Let Me Buy or Refer friends </button>
     </div>
 </form>

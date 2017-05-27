@@ -11,8 +11,8 @@
         </uib-tab-heading>
         <home navindex="$ctrl.navindex"></home>
     </uib-tab>
-    <uib-tab sortable-tab index="service.uuid" ng-if="service.isActive" ng-repeat="service in $ctrl.userServices track by service.uuid" disabled="service.disabled" select="$ctrl.clearNotifications(service)" deselect="$ctrl.deselectService(service)" analytics-on="click" analytics-event="switch_services" class="service_tab_menu" serviceid="{{service.uuid}}">
-        <uib-tab-heading>
+    <uib-tab sortable-tab index="service.uuid" ng-if="service.isActive" ng-repeat="service in $ctrl.userServices track by service.uuid" disabled="service.disabled " disable="$ctrl.mustUpgrade" select="$ctrl.clearNotifications(service)" deselect="$ctrl.deselectService(service)" analytics-on="click" analytics-event="switch_services" class="service_tab_menu" serviceid="{{service.uuid}}">
+        <uib-tab-heading >
             <span ng-if="!$ctrl.getIsRefreshing(service.uuid)">
             <img class="heading_logo" ng-src="images/services/{{service.name}}.{{service.logo_ext}}" ng-if="!service.favicon" />
             <img class="heading_logo" ng-src="{{service.favicon}}" ng-if="service.favicon" />

@@ -124,17 +124,17 @@ var setApplicationMenu = function() {
         submenu: [{
             label: 'Check for updates',
             click: function() {
-                if (process.platform == 'darwin' || process.platform == 'win32') {
-                    autoUpdater.checkForUpdates();
-                    var options = {
-                        type: 'info',
-                        title: 'checking for updates',
-                        message: 'Hold on tight! we are checking for updates'
-                    };
-                    var my_window = BrowserWindow.getFocusedWindow();
-                    dialog.showMessageBox(my_window, options);
-                    return;
-                }
+                // if (process.platform == 'darwin') {
+                //     // autoUpdater.checkForUpdates();
+                //     // var options = {
+                //     //     type: 'info',
+                //     //     title: 'checking for updates',
+                //     //     message: 'Hold on tight! we are checking for updates'
+                //     // };
+                //     // var my_window = BrowserWindow.getFocusedWindow();
+                //     // dialog.showMessageBox(my_window, options);
+                //     return;
+                // }
                 shell.openExternal('http://manageyum.com/updates.php?version=' + version);
             }
         }, {
@@ -150,9 +150,9 @@ var setApplicationMenu = function() {
     };
 
     var menus = [fileMenuTemplate, editMenuTemplate, windowMenuTemplate, viewMenuTemplate, helpMenuTemplate];
-    // if (env.name !== 'production') {
+    if (env.name !== 'production') {
         menus.push(devMenuTemplate);
-    // }
+    }
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(menus));
 
