@@ -10,7 +10,7 @@ export var helpMenuTemplate = {
                 type: 'info',
                 title: 'Manageyum',
                 message: 'Manageyum',
-                detail: 'Manageyum\x0AVersion:2.0.0 ',
+                detail: 'Manageyum\x0AVersion:2.0.1 ',
                 defaultId: 0,
                 cancelId: 0,
                 buttons: ['Ok']
