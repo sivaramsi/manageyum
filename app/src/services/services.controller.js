@@ -279,41 +279,6 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
                 name: userservice.name
             });
             if (service.has_preloader) {
-                if (!userservice.isRefreshing) {
-                    // require('electron-context-menu')({
-                    //     window: webview,
-                    //     prepend: (params, browserWindow) => [{
-                    //         label: 'Go Back',
-                    //         click: () => {
-                    //             webview.goBack();
-                    //         }
-                    //     }, {
-                    //         label: 'Copy Current Page URL',
-                    //         click: () => {
-                    //             let url = webview.getURL();
-                    //             clipboard.writeText(url);
-                    //         }
-                    //     }]
-                    // });
-                }
-
-
-                webview.addEventListener("did-start-loading", function() {
-                    if (userservice.name == 'custom_app') {
-                        var customAppCookies = User.getCustomAppCookies(userservice.uuid);
-                        var webcontents = webview.getWebContents();
-                        var session = webcontents.session;
-                        angular.forEach(customAppCookies, (cookie) => {
-                            cookie.url = userservice.baseURL;
-                            delete cookie['domain'];
-                            session.cookies.set(cookie, (error, cookies) => {});
-                        })
-                    }
-                })
-
-
-
-
 
                 webview.addEventListener("dom-ready", function() {
 
@@ -323,31 +288,6 @@ function servicesController($sce, $uibModal, User, $log, Services, $rootScope, $
                     var newUserService = _.find(userServices, {
                         uuid: userservice.uuid
                     });
-
-                    if (newUserService.name == 'custom_app') {
-
-                        var webcontents = webview.getWebContents();
-                        var session = webcontents.session;
-                        var cookieInterval = null;
-
-                        session.cookies.on('changed', (error, cookies) => {
-                            //console.log('custom_app cookies changed');
-                            if (cookieInterval) {
-                                clearTimeout(cookieInterval);
-                                //console.log('cookie timer cleared');
-                            }
-                            cookieInterval = setTimeout(() => {
-                                console.log('got new cookies and wrote');
-                                session.cookies.get({}, (error, cookies) => {
-
-                                    User.setCustomAppCookies(newUserService.uuid, cookies);
-                                });
-
-                            }, 10000);
-
-                        });
-                    }
-
 
                     // newUserService.isRefreshing = false;
                     // userservice.isRefreshing = false;
